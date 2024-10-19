@@ -25,7 +25,10 @@ const SignUpForm = () => {
 
     try {
       // Sign up the user
-      await axios.post("c", formData);
+      await axios.post(
+        "https://job-boar-sajal.up.railway.app/api/users/signup",
+        formData
+      );
 
       // Send email OTP
       await axios.post(
