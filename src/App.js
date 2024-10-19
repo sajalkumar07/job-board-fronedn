@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./components/signup";
+import Verifyotp from "./components/verfiytotp";
+import Createinterview from "./components/createinterview";
+import JobForm from "./components/jobform";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {" "}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/create-interview" element={<Createinterview />} />
+          <Route path="/create-interview/jobform" element={<JobForm />} />
+          <Route path="/verifyotp" element={<Verifyotp />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
