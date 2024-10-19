@@ -25,17 +25,26 @@ const SignUpForm = () => {
 
     try {
       // Sign up the user
-      await axios.post("http://localhost:8080/api/users/signup", formData);
+      await axios.post(
+        "https://job-board-backend-production.up.railway.app/api/users/signup",
+        formData
+      );
 
       // Send email OTP
-      await axios.post("http://localhost:8080/api/mail/sendmail", {
-        email: formData.email,
-      });
+      await axios.post(
+        "https://job-board-backend-production.up.railway.app/api/mail/sendmail",
+        {
+          email: formData.email,
+        }
+      );
 
       // Navigate to OTP verification page
-      await axios.post("http://localhost:8080/api/sms/sendsms", {
-        phoneNumber: formData.phoneNumber,
-      });
+      await axios.post(
+        "https://job-board-backend-production.up.railway.app/api/sms/sendsms",
+        {
+          phoneNumber: formData.phoneNumber,
+        }
+      );
 
       // Navigate to OTP verification page
       navigate("/verifyotp", {

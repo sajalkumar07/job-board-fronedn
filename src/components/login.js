@@ -14,7 +14,7 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/users/login",
+        "https://job-board-backend-production.up.railway.app/api/users/login",
         { email, password },
         {
           headers: {
