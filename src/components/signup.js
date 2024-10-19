@@ -25,14 +25,11 @@ const SignUpForm = () => {
 
     try {
       // Sign up the user
-      await axios.post(
-        "https://job-board-backend-production.up.railway.app/api/users/signup",
-        formData
-      );
+      await axios.post("c", formData);
 
       // Send email OTP
       await axios.post(
-        "https://job-board-backend-production.up.railway.app/api/mail/sendmail",
+        "https://job-boar-sajal.up.railway.app/api/mail/sendmail",
         {
           email: formData.email,
         }
@@ -40,7 +37,7 @@ const SignUpForm = () => {
 
       // Navigate to OTP verification page
       await axios.post(
-        "https://job-board-backend-production.up.railway.app/api/sms/sendsms",
+        "https://job-boar-sajal.up.railway.app/api/sms/sendsms",
         {
           phoneNumber: formData.phoneNumber,
         }

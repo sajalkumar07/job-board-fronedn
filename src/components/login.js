@@ -14,7 +14,7 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post(
-        "https://job-board-backend-production.up.railway.app/api/users/login",
+        "https://job-boar-sajal.up.railway.appp/api/users/login",
         { email, password },
         {
           headers: {

@@ -47,7 +47,7 @@ const JobForm = () => {
 
     try {
       const response = await axios.post(
-        "https://job-board-backend-production.up.railway.app/api/jobs/postJob",
+        "https://job-boar-sajal.up.railway.app/api/jobs/postJob",
         jobData,
         {
           headers: {
