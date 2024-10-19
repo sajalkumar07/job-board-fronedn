@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "./assets/image 650 1.png";
 
-const SignUpForm = () => {
+const OtpVerify = () => {
+  const [emailOtp, setEmailOtp] = useState("");
+  const [mobileOtp, setMobileOtp] = useState("");
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isMobileVerified, setIsMobileVerified] = useState(false);
+  const navigate = useNavigate();
+
+  const handleEmailVerify = () => {
+    if (emailOtp.length === 4) {
+      setIsEmailVerified(true);
+    }
+  };
+
+  const handleMobileVerify = () => {
+    if (mobileOtp.length === 4) {
+      setIsMobileVerified(true);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (isEmailVerified && isMobileVerified) {
+      navigate("/login"); // redirect to /login after verification
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="flex justify-between items-center p-4">
         <div className="">
-          <img src={Logo} alt="Logo" />{" "}
+          <img src={Logo} alt="Logo" />
         </div>
         <h1 className="text-xl font-semibold text-[#576474]">Contact</h1>
       </header>
@@ -25,11 +50,10 @@ const SignUpForm = () => {
         <div className="w-1/2 flex justify-center items-center">
           <div className="bg-white p-8 rounded-lg border-[1px] border-blue-400 w-[55%]">
             <div className="flex justify-center items-center">
-              {" "}
               <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
             </div>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div className="relative">
                 <span className="absolute left-2 top-2.5 text-gray-400">
                   <svg
@@ -43,14 +67,27 @@ const SignUpForm = () => {
                   </svg>
                 </span>
                 <input
-                  type="email"
+                  type="text"
                   placeholder="Email OTP"
                   className="w-full pl-10 pr-4 py-2 border rounded-md"
+                  value={emailOtp}
+                  maxLength={4} // Limit to 4 digits
+                  onChange={(e) => setEmailOtp(e.target.value)}
                 />
+                {isEmailVerified && (
+                  <span className="absolute right-2 top-2.5 text-green-500">
+                    ✓
+                  </span>
+                )}
               </div>
-              <button className="w-full bg-blue-600 text-white py-2 rounded-md">
-                Verify
+              <button
+                type="button"
+                className="w-full bg-blue-600 text-white py-2 rounded-md"
+                onClick={handleEmailVerify}
+              >
+                Verify Email
               </button>
+
               <div className="relative">
                 <span className="absolute left-2 top-2.5 text-gray-400">
                   <svg
@@ -59,18 +96,37 @@ const SignUpForm = () => {
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
-                    {" "}
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
                 </span>
                 <input
-                  type="Name"
+                  type="text"
                   placeholder="Mobile OTP"
                   className="w-full pl-10 pr-4 py-2 border rounded-md"
+                  value={mobileOtp}
+                  maxLength={4} // Limit to 4 digits
+                  onChange={(e) => setMobileOtp(e.target.value)}
                 />
+                {isMobileVerified && (
+                  <span className="absolute right-2 top-2.5 text-green-500">
+                    ✓
+                  </span>
+                )}
               </div>
-              <button className="w-full bg-blue-600 text-white py-2 rounded-md">
-                Verify
+              <button
+                type="button"
+                className="w-full bg-blue-600 text-white py-2 rounded-md"
+                onClick={handleMobileVerify}
+              >
+                Verify Mobile
+              </button>
+
+              <button
+                type="submit"
+                className="w-full bg-green-600 text-white py-2 rounded-md"
+                onClick={handleSubmit}
+              >
+                Complete Signup
               </button>
             </form>
           </div>
@@ -80,4 +136,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default OtpVerify;

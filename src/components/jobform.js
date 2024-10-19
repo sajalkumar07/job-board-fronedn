@@ -7,6 +7,7 @@ const JobForm = () => {
   const [emails, setEmails] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+
   const [jobDescription, setJobDescription] = useState("");
   const [experienceLevel, setExperienceLevel] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -34,6 +35,8 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const token = localStorage.getItem("authToken");
+
     const jobData = {
       jobTitle,
       jobDescription,
@@ -48,8 +51,7 @@ const JobForm = () => {
         jobData,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MTNhMWQyMDlkYzFjZWJiN2FjNmMxMiIsImlhdCI6MTcyOTM0MDMzNiwiZXhwIjoxNzI5MzQzOTM2fQ.t1Kjc2_iyYKrVtV7evj_NNfC17GFQPF4V9WUuoidjzE",
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
