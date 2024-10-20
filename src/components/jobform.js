@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios"; // Import axios
 import { useNavigate } from "react-router-dom";
 
-import Logo from "./assets/image 650 1.png";
+import Logo from "../public/image 650 1.png";
 
 const JobForm = () => {
   const [emails, setEmails] = useState([]);
