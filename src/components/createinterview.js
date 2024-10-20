@@ -1,52 +1,75 @@
 import React, { useState } from "react";
 import Logo from "./assets/image 650 1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateInterview = () => {
+  const userName = localStorage.getItem("userName");
+  const navigate = useNavigate();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove the token
+    localStorage.removeItem("userName"); // Optional: Clear the username
+    navigate("/"); // Redirect to home page
+  };
+
   return (
     <div>
-      {" "}
       <header className="flex justify-between items-center p-6 border-b-[1px] border-[#A8A8A8]">
-        <div className="">
+        <div>
           <img src={Logo} alt="Logo" />
         </div>
-        <div className=" flex justify-between items-center space-x-4">
-          {" "}
-          {/* Added ml-2 to give a little space if needed */}
+        <div className="flex justify-between items-center space-x-4">
           <h1 className="text-xl font-semibold text-[#576474]">Contact</h1>
-          <div className=" flex justify-between items-center gap-3 border-[1px] border-[#A8A8A8] p-2 rounded-lg">
-            <div className="">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 32 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="15.7195" cy="16.5" r="15.5488" fill="#A8A8A8" />
-              </svg>
+          <div className="relative">
+            <div
+              className="flex justify-between items-center gap-3 border-[1px] border-[#A8A8A8] p-2 rounded-lg cursor-pointer"
+              onClick={() => setDropdownOpen(!isDropdownOpen)} // Toggle dropdown
+            >
+              <div>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="15.7195" cy="16.5" r="15.5488" fill="#A8A8A8" />
+                </svg>
+              </div>
+              {userName || "Your Name"}
+              <div>
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 18 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.00001 15.8293L0.382005 0.902439L17.618 0.902441L9.00001 15.8293Z"
+                    fill="#A8A8A8"
+                  />
+                </svg>
+              </div>
             </div>
-            Your Name
-            <div>
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 18 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9.00001 15.8293L0.382005 0.902439L17.618 0.902441L9.00001 15.8293Z"
-                  fill="#A8A8A8"
-                />
-              </svg>
-            </div>
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-[#A8A8A8] rounded-lg shadow-lg">
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
       <div className="flex">
-        <sidebar className="pt-10 border-r-[1px] border-[#A8A8A8]  flex flex-col w-20 h-[87.4vh] items-center  overflow-hidden ">
-          <div className="">
+        <sidebar className="pt-10 border-r-[1px] border-[#A8A8A8] flex flex-col w-20 h-[87.4vh] items-center overflow-hidden">
+          <div>
             <svg
               width="30"
               height="30"
@@ -61,7 +84,7 @@ const CreateInterview = () => {
             </svg>
           </div>
         </sidebar>
-        <div className="w-[100%] h-[87.4vh]  p-10 -mt-1">
+        <div className="w-[100%] h-[87.4vh] p-10 -mt-1">
           <Link to="/create-interview/jobform">
             <button className="bg-[#0B66EF] w-[200px] h-[43px] text-white font-semibold rounded-lg">
               Create Interview

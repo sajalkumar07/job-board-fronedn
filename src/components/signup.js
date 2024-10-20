@@ -30,6 +30,8 @@ const SignUpForm = () => {
         formData
       );
 
+      localStorage.setItem("userName", formData.name);
+
       // Send email OTP
       await axios.post(
         "https://job-boar-sajal.up.railway.app/api/mail/sendmail",
